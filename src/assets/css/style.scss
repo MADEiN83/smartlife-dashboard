@@ -1,0 +1,14 @@
+@import "./abstracts/functions";
+@import "./abstracts/mixins";
+@import "./abstracts/variables";
+
+@import "./base/base";
+@import "./base/animations";
+@import "./base/typography";
+@import "./base/utilities";
+
+// Components
+// @import "components/Button/style.scss";
+
+// Pages
+@import "pages/home/style.scss";
