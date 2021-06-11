@@ -1,0 +1,33 @@
+.device-card {
+  @include flex(column, center, center);
+  width: 20rem;
+  height: 20rem;
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &[data-state="true"] {
+    background-color: #009ade;
+  }
+
+  &[data-state="false"] {
+    background-color: #a8d8ed;
+  }
+
+  &[data-online="false"] {
+    background-color: grey;
+    cursor: not-allowed;
+  }
+
+  &__name {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  &__image {
+    width: 4rem;
+    height: 4rem;
+    background-size: contain;
+  }
+}

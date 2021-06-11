@@ -32,3 +32,7 @@ export interface TuyaDevice {
   dev_type: string;
   ha_type: string;
 }
+
+export interface TuyaBaseResponse {
+  header: { code: "SUCCESS" | "ERROR" | "TargetOffline"; payloadVersion: 1 };
+}

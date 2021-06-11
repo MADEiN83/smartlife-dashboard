@@ -8,6 +8,10 @@ import { SignInData } from "./login.interface";
 export const setLoading = createAction<boolean>("SET_LOADING");
 export const setToken = createAction<TuyaSignInResponse>("SET_TOKEN");
 export const setDevices = createAction<TuyaDevice[]>("SET_DEVICES");
+export const updateDeviceState = createAction<{
+  deviceId: string;
+  state: boolean;
+}>("UPDATE_DEVICE_STATE");
 
 export const signIn = (data: SignInData) => async (dispatch: DispatchType) => {
   dispatch(setLoading(true));
@@ -26,9 +30,22 @@ export const signIn = (data: SignInData) => async (dispatch: DispatchType) => {
 
 export const getDevices =
   (service: TuyaService) => async (dispatch: DispatchType) => {
-    console.log("oui");
     const {
       payload: { devices },
     } = await service.getDevices();
     dispatch(setDevices(devices));
+  };
+
+export const toggle =
+  (deviceId: string, state: boolean) => async (dispatch: DispatchType) => {
+    const tuyaService = new TuyaService();
+    const {
+      header: { code },
+    } = await tuyaService.toggle(deviceId, state);
+
+    if (code !== "SUCCESS") {
+      return;
+    }
+
+    dispatch(updateDeviceState({ deviceId, state }));
   };

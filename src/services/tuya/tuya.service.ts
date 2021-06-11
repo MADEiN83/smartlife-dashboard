@@ -1,6 +1,10 @@
 import store from "core/redux";
 import { SignInData } from "core/redux/reducer/login/login.interface";
-import { TuyaDeviceResponce, TuyaSignInResponse } from "./tuya.interfaces";
+import {
+  TuyaBaseResponse,
+  TuyaDeviceResponce,
+  TuyaSignInResponse,
+} from "./tuya.interfaces";
 import TUYA_ROUTES from "./tuya.routes";
 
 const { REACT_APP_BASE_URL } = process.env;
@@ -28,6 +32,26 @@ class TuyaService {
       },
       payload: {
         accessToken: this.getAccessToken(),
+      },
+    };
+
+    return await this.post(TUYA_ROUTES.SKILL, JSON.stringify(body));
+  };
+
+  toggle = async (
+    deviceId: string,
+    state: boolean
+  ): Promise<TuyaBaseResponse> => {
+    const body = {
+      header: {
+        name: "turnOnOff",
+        namespace: "control",
+        payloadVersion: 1,
+      },
+      payload: {
+        accessToken: this.getAccessToken(),
+        devId: deviceId,
+        value: state ? 1 : 0,
       },
     };
 
