@@ -1,11 +1,12 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-import { setLoading, setToken } from "./login.actions";
+import { setLoading, setToken, setDevices } from "./login.actions";
 import { LoginReducerState } from "./login.interface";
 
 const initialState: LoginReducerState = {
   loading: false,
   auth: {},
+  devices: [],
 };
 
 const mainReducer = createReducer<LoginReducerState>(initialState, {
@@ -14,6 +15,9 @@ const mainReducer = createReducer<LoginReducerState>(initialState, {
   },
   [setToken.type]: (state, action: any) => {
     state.auth = action.payload;
+  },
+  [setDevices.type]: (state, action: any) => {
+    state.devices = action.payload;
   },
 });
 
